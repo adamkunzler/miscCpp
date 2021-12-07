@@ -60,6 +60,7 @@ private:
 	const float DistanceThreshold = 100.0f;
 		
 	bool isShowTails{ true };
+	bool isShowEllipse{ false };
 
 public:
 	Scene(int width, int height, std::string title)
@@ -86,7 +87,7 @@ public:
 		//_e.a = 500.0f;
 		//_e.b = 300.0f;
 		_e.a = 1000.0f;
-		_e.b = 1000.0f;
+		_e.b = 700.0f;
 		_e.c = std::sqrtf(_e.a * _e.a - _e.b * _e.b);
 		_e.f1 = -_e.c;
 		_e.f2 = _e.c;
@@ -102,6 +103,11 @@ public:
 		_f2 = sf::CircleShape{ 3.0f };
 		_f2.setPosition(sf::Vector2f{ _e.c + halfWidth, halfHeight });
 		_f2.setOrigin(1.5f, 1.5f);			
+	}
+
+	void toggleEllipse()
+	{
+		isShowEllipse = !isShowEllipse;
 	}
 
 	void addParticle1(const float initX, const float initY)
@@ -184,9 +190,12 @@ public:
 			_texture.clear();
 		
 		// render ellipse and foci
-		_texture.draw(_ellipse);
-		_texture.draw(_f1);
-		_texture.draw(_f2);
+		if (isShowEllipse)
+		{
+			_texture.draw(_ellipse);
+			_texture.draw(_f1);
+			_texture.draw(_f2);
+		}
 		
 		// render particles
 		for (auto& p : _particles)

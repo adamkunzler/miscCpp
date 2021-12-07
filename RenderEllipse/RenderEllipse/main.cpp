@@ -35,6 +35,9 @@ int main()
                 case sf::Keyboard::Space:
                     scene.restart();
                     break;
+                case sf::Keyboard::E:
+                    scene.toggleEllipse();
+                    break;
                 }
                 break;
             }            
