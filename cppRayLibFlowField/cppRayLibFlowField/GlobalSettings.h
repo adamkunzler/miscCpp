@@ -14,7 +14,7 @@ struct GlobalSettings
 	unsigned char initTransparency{ 1 };
 
 	// flow field / noise
-	std::size_t noiseDim{ 512 };
+	std::size_t noiseDim{ 1024 };
 	
 	float noiseScaleX{ (float)screenWidth / (float)noiseDim };
 	float noiseScaleHalfX{ noiseScaleX / 2.f };

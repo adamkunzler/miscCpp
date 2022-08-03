@@ -13,6 +13,84 @@
 #include "Particle.h"
 #include "FlowField.h"
 
+void showInfoOverlay();
+
+int main(void)
+{
+	bool infoOverlayVisible{ false };
+
+	//
+	// INITIALIZATION
+	//
+	GlobalSettings settings;
+	settings.screenWidth = 2048;
+	settings.screenHeight = 1792;
+	settings.update();
+
+	InitWindow(settings.screenWidth, settings.screenHeight, ".: RayLib Flow Field :.");	
+	SetTargetFPS(60*1);					
+
+	FlowField flowField{ settings };
+	flowField.reset();
+	
+	//
+	// MAIN RENDER LOOP
+	//
+	rlImGuiSetup(true);
+	while (!WindowShouldClose())    // Detect window close button or ESC key
+	{
+		//
+		// PROCESS INPUTS
+		//
+
+		if (IsKeyPressed(KEY_C))		
+			flowField.reset();					
+
+		if(IsKeyPressed(KEY_I))
+			infoOverlayVisible = !infoOverlayVisible;
+
+		if (IsKeyPressed(KEY_P))
+			TakeScreenshot("flowfield.png");
+
+		if (IsKeyPressed(KEY_Z))
+		{
+			settings.moveZ = !settings.moveZ;
+			if (settings.moveZ) std::cout << "Z ON" << std::endl;
+			else std::cout << "Z OFF" << std::endl;
+		}
+				
+		//
+		// UPDATE
+		//
+
+		flowField.update();
+
+		//
+		// RENDER
+		//
+		
+		flowField.preRender();
+
+		BeginDrawing();
+			ClearBackground(BLACK);
+				
+			flowField.render();
+
+			rlImGuiBegin();
+				if(infoOverlayVisible) showInfoOverlay();
+			rlImGuiEnd();		
+		EndDrawing();		
+	}
+
+	//
+	// DE-INITIALIZATION
+	//
+
+	rlImGuiShutdown();
+	CloseWindow();	
+
+	return 0;
+}
 
 void showInfoOverlay()
 {
@@ -49,7 +127,7 @@ void showInfoOverlay()
 			ImGui::Text("Mouse Position: (%.1f,%.1f)", io.MousePos.x, io.MousePos.y);
 		else
 			ImGui::Text("Mouse Position: <invalid>");
-		
+
 		if (ImGui::BeginPopupContextWindow())
 		{
 			if (ImGui::MenuItem("Custom", NULL, corner == -1)) corner = -1;
@@ -63,75 +141,3 @@ void showInfoOverlay()
 	}
 	ImGui::End();
 }
-
-int main(void)
-{
-	//
-	// INITIALIZATION
-	//
-	GlobalSettings settings;
-	settings.screenWidth = 2048;
-	settings.screenHeight = 1792;
-	settings.update();
-
-	InitWindow(settings.screenWidth, settings.screenHeight, ".: RayLib Flow Field :.");	
-	SetTargetFPS(60*1);					
-
-	FlowField flowField{ settings };
-	
-	//
-	// MAIN RENDER LOOP
-	//
-	rlImGuiSetup(true);
-	while (!WindowShouldClose())    // Detect window close button or ESC key
-	{
-		//
-		// PROCESS INPUTS
-		//
-
-		if (IsKeyPressed(KEY_C))		
-			flowField.reset();					
-
-		if (IsKeyPressed(KEY_Z))
-		{
-			settings.moveZ = !settings.moveZ;
-			if (settings.moveZ) std::cout << "Z ON" << std::endl;
-			else std::cout << "Z OFF" << std::endl;
-		}
-				
-		//
-		// UPDATE
-		//
-
-		flowField.update();
-
-		//
-		// RENDER
-		//
-		
-		flowField.preRender();
-
-		BeginDrawing();
-			ClearBackground(BLACK);
-				
-			flowField.render();
-
-			rlImGuiBegin();
-				showInfoOverlay();
-			rlImGuiEnd();
-		
-			DrawFPS(10, 10);
-		
-		EndDrawing();		
-	}
-
-	//
-	// DE-INITIALIZATION
-	//
-
-	rlImGuiShutdown();
-	CloseWindow();	
-
-	return 0;
-}
-

@@ -65,11 +65,11 @@ public:
 			auto yIndex = (int)std::floor(particle.position.y / _settings.noiseScaleY);
 
 			if (xIndex < 0) xIndex = 0;
-			if (xIndex > _settings.noiseDim - 1) xIndex = _settings.noiseDim - 1;
+			if (xIndex > _settings.noiseDim - 1) xIndex = (int)_settings.noiseDim - 1;
 			if (yIndex < 0) yIndex = 0;
-			if (yIndex > _settings.noiseDim - 1) yIndex = _settings.noiseDim - 1;
+			if (yIndex > _settings.noiseDim - 1) yIndex = (int)_settings.noiseDim - 1;
 
-			auto angle = getNoiseAt(xIndex, yIndex, _settings.noiseZ) * PI * 2.f;
+			auto angle = getNoiseAt((float)xIndex, (float)yIndex, _settings.noiseZ) * PI * 2.f;
 			auto accel = Vector2{ cosf(angle), sinf(angle) };
 			//accel = Vector2Normalize(accel);
 			particle.acceleration = Vector2Scale(accel, _settings.flowFieldStrength);
@@ -105,16 +105,16 @@ public:
 		{
 			for (int x = 0; x < _settings.noiseDim; ++x)
 			{
-				auto angle = getNoiseAt(x, y, _settings.noiseZ) * PI * 2.f;
+				auto angle = getNoiseAt((float)x, (float)y, _settings.noiseZ) * PI * 2.f;
 
-				int cx = x * _settings.noiseScaleX + _settings.noiseScaleHalfX;
-				int cy = y * _settings.noiseScaleY + _settings.noiseScaleHalfY;
+				auto cx = x * _settings.noiseScaleX + _settings.noiseScaleHalfX;
+				auto cy = y * _settings.noiseScaleY + _settings.noiseScaleHalfY;
 
-				int cx2 = cx + _settings.noiseScaleHalfX * cosf(angle);
-				int cy2 = cy + _settings.noiseScaleHalfY * sinf(angle);
+				auto cx2 = cx + _settings.noiseScaleHalfX * cosf(angle);
+				auto cy2 = cy + _settings.noiseScaleHalfY * sinf(angle);
 
-				DrawLine(cx, cy, cx2, cy2, DARKPURPLE);
-				DrawCircle(cx2, cy2, 2.f, DARKGREEN);
+				DrawLine((int)cx, (int)cy, (int)cx2, (int)cy2, DARKPURPLE);
+				DrawCircle((int)cx2, (int)cy2, 2.f, DARKGREEN);
 			}
 		}
 	}
