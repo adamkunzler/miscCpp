@@ -44,6 +44,18 @@
     <ClInclude Include="vendors\rlImGuiColors.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FlowField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RayLibMathHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="vendors\rlImGui.lib" />
