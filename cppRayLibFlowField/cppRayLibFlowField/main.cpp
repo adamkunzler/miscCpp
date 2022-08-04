@@ -86,6 +86,7 @@ int main(void)
 	// DE-INITIALIZATION
 	//
 
+	flowField.cleanup();
 	rlImGuiShutdown();
 	CloseWindow();	
 

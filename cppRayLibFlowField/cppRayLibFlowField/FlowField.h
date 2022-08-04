@@ -126,6 +126,11 @@ public:
 		float nz = z * _settings.noiseScale;
 		return (float)_noiseGenerator.eval(nx, ny, nz);
 	}
+
+	void cleanup()
+	{
+		UnloadRenderTexture(_texture);
+	}
 };
 
 #endif
