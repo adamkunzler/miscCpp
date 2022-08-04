@@ -1,0 +1,17 @@
+
+[] Add game states
+	- splash screen
+	- game
+	- game over
+[] high scores
+[] kickbacks on rotation
+[] actual levels and increase speed (need to update score logic too)
+[] better layout of game
+[] shadow piece
+[] 3x preview pieces
+[] setting?
+[] more soundtracks
+[] sound effects (rotation, clear line, new level, etc)
+[] fix game over / restart bug
+[] end game animation (maybe like clear line)
+[] bloom filter or textures for tiles instead of colored squares
