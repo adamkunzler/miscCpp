@@ -1,27 +1,20 @@
 #include "DinoStateDie.h"
 
-DinoStateDie::DinoStateDie() {
-	std::cout << "DinoStateDie ctor" << std::endl;
+DinoStateDie::DinoStateDie() {	
 	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_DEAD);
 }
 
 void DinoStateDie::enter(Dino& dino)
-{
-	std::cout << "enter DinoStateDie..." << std::endl;
+{	
 	_sprite.setCurrentFrame(0);
 }
 
 void DinoStateDie::exit(Dino& dino)
-{
-	std::cout << "exit DinoStateDie..." << std::endl;
+{	
 }
 
 void DinoStateDie::handleInput(Dino& dino)
-{
-	if (IsKeyPressed(KEY_SPACE))
-	{
-		std::cout << "DinoStateDie" << std::endl;
-	}
+{	
 }
 
 void DinoStateDie::update(Dino& dino)

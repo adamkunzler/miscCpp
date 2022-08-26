@@ -12,6 +12,7 @@ DinoGame::DinoGame()
 
 	_dino = std::make_unique<Dino>();
 	_dino->position = Vector2{ 200.f, 700.f };
+	_dino->startY = 700.f;
 }
 
 void DinoGame::handleInput()

@@ -1,9 +1,9 @@
 #ifndef DINO_H
 #define DINO_H
 
-#pragma message("Loading Dino.h...")
-
 #include "raylib.h"
+
+#include "../Globals.h"
 
 #include "states/DinoStateIdle.h"
 #include "states/DinoStateWalk.h"
@@ -21,7 +21,8 @@ private:
 	DinoState* _previousState{ 0 };
 			
 public:
-	Vector2 position{ 0, 0 };
+	float startY;
+	Vector2 position{ 0, 0 };	
 	float size{ 256.f };
 	
 public:	
@@ -32,6 +33,8 @@ public:
 	void render();
 
 	void setState(DinoState* state);
+	void restorePreviousState();
 };
+
 
 #endif

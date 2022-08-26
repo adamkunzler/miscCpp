@@ -12,7 +12,10 @@ class DinoStateJump : public DinoState
 {
 private:
 	Sprite _sprite;
+	bool _isJumpFinished{ false };
 
+	Vector2 _velocity;
+	
 public:
 	DinoStateJump();
 

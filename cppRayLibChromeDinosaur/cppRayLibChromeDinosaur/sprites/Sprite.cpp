@@ -48,8 +48,7 @@ void Sprite::render(const Vector2& position, const float maxWidth, const bool fl
 
 	if (flipHoriz) src.width = -src.width;
 
-	DrawTexturePro(*_config.texture, src, dest, origin, 0.f, WHITE);
-	//DrawRectangleLines((int)(dest.x - origin.x), (int)(dest.y - origin.y), (int)dest.width, (int)dest.height, RAYWHITE);
+	DrawTexturePro(*_config.texture, src, dest, origin, 0.f, WHITE);	
 }
 
 int Sprite::getFrameCount() const

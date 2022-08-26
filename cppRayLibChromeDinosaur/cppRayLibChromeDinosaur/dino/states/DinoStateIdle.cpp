@@ -1,26 +1,20 @@
 #include "DinoStateIdle.h"
 
-DinoStateIdle::DinoStateIdle() {
-	std::cout << "DinoStateIdle ctor" << std::endl;
+DinoStateIdle::DinoStateIdle() {	
 	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_IDLE);
 }
 
 void DinoStateIdle::enter(Dino& dino)
-{
-	std::cout << "enter DinoStateIdle..." << std::endl;
+{	
 }
 
 void DinoStateIdle::exit(Dino& dino)
-{
-	std::cout << "exit DinoStateIdle..." << std::endl;
+{	
 }
 
 void DinoStateIdle::handleInput(Dino& dino)
-{
-	if (IsKeyPressed(KEY_SPACE))
-	{
-		std::cout << "DinoStateIdle" << std::endl;
-	}
+{	
+	if (IsKeyPressed(KEY_SPACE))  dino.setState(&DinoStateJump::getInstance());
 }
 
 void DinoStateIdle::update(Dino& dino)

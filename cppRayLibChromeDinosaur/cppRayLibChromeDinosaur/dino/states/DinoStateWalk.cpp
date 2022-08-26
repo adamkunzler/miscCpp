@@ -1,26 +1,20 @@
 #include "DinoStateWalk.h"
 
-DinoStateWalk::DinoStateWalk() {
-	std::cout << "DinoStateWalk ctor" << std::endl;
+DinoStateWalk::DinoStateWalk() {	
 	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_WALK);
 }
 
 void DinoStateWalk::enter(Dino& dino)
-{
-	std::cout << "enter DinoStateWalk..." << std::endl;
+{	
 }
 
 void DinoStateWalk::exit(Dino& dino)
-{
-	std::cout << "exit DinoStateWalk..." << std::endl;
+{	
 }
 
 void DinoStateWalk::handleInput(Dino& dino)
-{
-	if (IsKeyPressed(KEY_SPACE))
-	{
-		std::cout << "DinoStateWalk" << std::endl;
-	}
+{	
+	if (IsKeyPressed(KEY_SPACE))  dino.setState(&DinoStateJump::getInstance());
 }
 
 void DinoStateWalk::update(Dino& dino)

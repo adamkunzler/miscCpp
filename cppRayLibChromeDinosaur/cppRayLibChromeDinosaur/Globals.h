@@ -10,6 +10,9 @@ private:
 	
 	std::unique_ptr<SpriteFactory> _spriteFactory;
 
+public:
+	
+
 public:		
 	static Globals& instance();
 	
@@ -17,5 +20,8 @@ public:
 
 	SpriteFactory& spriteFactory();
 };
+
+
+Vector2& operator+=(Vector2& a, const Vector2& b);
 
 #endif

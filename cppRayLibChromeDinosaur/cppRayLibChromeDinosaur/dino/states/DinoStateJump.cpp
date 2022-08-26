@@ -1,31 +1,38 @@
 #include "DinoStateJump.h"
 
-DinoStateJump::DinoStateJump() {
-	std::cout << "DinoStateJump ctor" << std::endl;
+DinoStateJump::DinoStateJump() {	
 	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_JUMP);
 }
 
 void DinoStateJump::enter(Dino& dino)
-{
-	std::cout << "enter DinoStateJump..." << std::endl;
+{	
+	_isJumpFinished = false;
+	_sprite.setCurrentFrame(2);
+	_velocity.y = 25;
 }
 
 void DinoStateJump::exit(Dino& dino)
-{
-	std::cout << "exit DinoStateJump..." << std::endl;
+{	
+	_isJumpFinished = true;
+	_sprite.setCurrentFrame(2);
 }
 
 void DinoStateJump::handleInput(Dino& dino)
-{
-	if (IsKeyPressed(KEY_SPACE))
-	{
-		std::cout << "DinoStateJump" << std::endl;
-	}
+{	
 }
 
 void DinoStateJump::update(Dino& dino)
-{
+{	
 	_sprite.update();
+	
+	dino.position.y -= _velocity.y;
+	_velocity.y -= 0.75f;
+
+	if (dino.position.y >= dino.startY) 
+	{
+		dino.restorePreviousState();		
+		dino.position.y = dino.startY;
+	}
 }
 
 void DinoStateJump::render(Dino& dino)

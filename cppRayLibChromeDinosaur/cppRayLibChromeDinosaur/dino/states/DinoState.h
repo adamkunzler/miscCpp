@@ -1,8 +1,6 @@
 #ifndef DINOSTATE_H
 #define DINOSTATE_H
 
-#pragma message("Loading DinoState.h...")
-
 #include <iostream>
 
 class Dino;

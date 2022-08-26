@@ -13,25 +13,30 @@ void Dino::setState(DinoState* state)
 	_state->enter(*this);
 }
 
+void Dino::restorePreviousState()
+{
+	setState(_previousState);
+}
+
 void Dino::handleInput()
 {
 	_state->handleInput(*this);
 	
 	if (IsKeyPressed(KEY_ONE))   setState(&DinoStateIdle::getInstance());
 	if (IsKeyPressed(KEY_TWO))   setState(&DinoStateWalk::getInstance());
-	if (IsKeyPressed(KEY_THREE)) setState(&DinoStateRun::getInstance());
-	if (IsKeyPressed(KEY_FOUR))  setState(&DinoStateJump::getInstance());
+	if (IsKeyPressed(KEY_THREE)) setState(&DinoStateRun::getInstance());	
 	if (IsKeyPressed(KEY_FIVE))  setState(&DinoStateDie::getInstance());
-	if (IsKeyPressed(KEY_SIX))   setState(&DinoStateDead::getInstance());
 
 }
 
 void Dino::update()
 {	
-	_state->update(*this);
+	_state->update(*this);	
+
+	if (position.y >= startY) position.y = startY;
 }
 
 void Dino::render()
 {	
-	_state->render(*this);
+	_state->render(*this);	
 }

@@ -1,8 +1,6 @@
 #ifndef DINOGAME_H
 #define DINOGAME_H
 
-#pragma message("Loading DinoGame.h...")
-
 #include "Globals.h"
 #include "Dino/Dino.h"
 
