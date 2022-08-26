@@ -9,8 +9,8 @@ int main(void)
 	//
 	// Initialization	
 	//
-	const int screenWidth{ 2048 };
-	const int screenHeight{ 1024 };
+	const int screenWidth{ 1750 };
+	const int screenHeight{ 793 };
 
 	InitWindow(screenWidth, screenHeight, ".: Dinosaur Game :.");
 

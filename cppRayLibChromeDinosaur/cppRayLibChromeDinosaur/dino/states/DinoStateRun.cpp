@@ -20,6 +20,9 @@ void DinoStateRun::handleInput(Dino& dino)
 void DinoStateRun::update(Dino& dino)
 {
 	_sprite.update();
+
+	if (Globals::instance().worldSpeed > 15) // 12 is the initial fps (80% of 15 is 12)
+		_sprite.frameSpeed = (int)(Globals::instance().worldSpeed * 0.8f);
 }
 
 void DinoStateRun::render(Dino& dino)

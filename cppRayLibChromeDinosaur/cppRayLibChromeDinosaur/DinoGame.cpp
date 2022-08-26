@@ -11,23 +11,28 @@ DinoGame::DinoGame()
 	Globals::instance().spriteFactory().registerSprite(SpriteType::DINO_DEAD, "resources/dino/dino-dead.png", Vector2{ 680, 472 });
 
 	_dino = std::make_unique<Dino>();
-	_dino->position = Vector2{ 200.f, 700.f };
-	_dino->startY = 700.f;
+	_dino->position = Vector2{ 200.f, 660.f };
+	_dino->startY = 660.f;
 }
 
 void DinoGame::handleInput()
-{
+{	
 	_dino->handleInput();
+
+	if (IsKeyPressed(KEY_KP_ADD)) Globals::instance().worldSpeed += 1.f;
+	if (IsKeyPressed(KEY_KP_SUBTRACT)) Globals::instance().worldSpeed -= 1.f;
 }
 
-void DinoGame::update()
-{
+void DinoGame::update(){			
 	_dino->update();
+	_background.update();
 }
 
 void DinoGame::render()
 {
+	_background.renderBackground();
 	_dino->render();
-
+	_background.renderForeground();
+	
 	DrawText("Dinosaurs!", 10, 10, 50, RAYWHITE);
 }

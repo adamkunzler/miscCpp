@@ -11,7 +11,7 @@ private:
 	std::unique_ptr<SpriteFactory> _spriteFactory;
 
 public:
-	
+	float worldSpeed{ 0.f };
 
 public:		
 	static Globals& instance();

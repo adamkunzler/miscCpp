@@ -1,6 +1,16 @@
 #ifndef DINOSTATE_H
 #define DINOSTATE_H
 
+// Thoughts on improvements
+/*
+
+	- non-static instances - need to manage memory to avoid fragmentation (Game Programming Patterns)
+	- StateManager - Game AI by Example
+	- Generic State  - Game AI by Example
+
+*/
+
+
 #include <iostream>
 
 class Dino;
@@ -9,8 +19,7 @@ class DinoState
 {
 public:	
 	DinoState()
-	{
-		std::cout << "DinoState ctor" << std::endl;
+	{		
 	}
 
 	virtual ~DinoState() {}

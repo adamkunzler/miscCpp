@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="dino\Dino.cpp" />
     <ClCompile Include="dino\states\DinoState.cpp" />
     <ClCompile Include="dino\states\DinoStateDead.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="sprites\SpriteFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="dino\Dino.h" />
     <ClInclude Include="DinoGame.h" />
     <ClInclude Include="dino\states\DinoState.h" />
@@ -171,14 +173,23 @@
     <Text Include="sprites\notes.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\Background layers\Layer_0000_9.png" />
+    <Image Include="resources\Background layers\Layer_0001_8.png" />
+    <Image Include="resources\Background layers\Layer_0002_7.png" />
+    <Image Include="resources\Background layers\Layer_0003_6.png" />
+    <Image Include="resources\Background layers\Layer_0004_Lights.png" />
+    <Image Include="resources\Background layers\Layer_0005_5.png" />
+    <Image Include="resources\Background layers\Layer_0006_4.png" />
+    <Image Include="resources\Background layers\Layer_0007_Lights.png" />
+    <Image Include="resources\Background layers\Layer_0008_3.png" />
+    <Image Include="resources\Background layers\Layer_0009_2.png" />
+    <Image Include="resources\Background layers\Layer_0010_1.png" />
+    <Image Include="resources\Background layers\Layer_0011_0.png" />
     <Image Include="resources\dino\dino-dead.png" />
     <Image Include="resources\dino\dino-idle.png" />
     <Image Include="resources\dino\dino-jump.png" />
     <Image Include="resources\dino\dino-run.png" />
     <Image Include="resources\dino\dino-walk.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\retro_computer.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

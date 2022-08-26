@@ -34,6 +34,8 @@ public:
 
 	void setState(DinoState* state);
 	void restorePreviousState();
+	
+	bool isJumping();
 };
 
 

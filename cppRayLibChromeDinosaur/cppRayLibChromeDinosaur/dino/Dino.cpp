@@ -33,10 +33,21 @@ void Dino::update()
 {	
 	_state->update(*this);	
 
-	if (position.y >= startY) position.y = startY;
+	if (position.y >= startY) position.y = startY;		
+
+	if (Globals::instance().worldSpeed > 0 && Globals::instance().worldSpeed <= 5 && !isJumping()) 
+		setState(&DinoStateWalk::getInstance());
+
+	if (Globals::instance().worldSpeed > 5 && !isJumping()) 
+		setState(&DinoStateRun::getInstance());
 }
 
 void Dino::render()
 {	
 	_state->render(*this);	
+}
+
+bool Dino::isJumping()
+{
+	return dynamic_cast<DinoStateJump*>(_state) != nullptr;
 }

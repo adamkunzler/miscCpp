@@ -57,6 +57,9 @@
     <ClCompile Include="dino\states\DinoStateDead.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dino\Dino.h">
@@ -98,6 +101,9 @@
     <ClInclude Include="dino\states\DinoStateDead.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="sprites\notes.txt" />
@@ -118,8 +124,41 @@
     <Image Include="resources\dino\dino-walk.png">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="resources\retro_computer.ttf" />
+    <Image Include="resources\Background layers\Layer_0000_9.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0001_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0002_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0003_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0004_Lights.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0005_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0006_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0007_Lights.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0008_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0009_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0010_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\Background layers\Layer_0011_0.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
