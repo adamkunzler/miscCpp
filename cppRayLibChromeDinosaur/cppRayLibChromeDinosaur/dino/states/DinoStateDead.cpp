@@ -8,7 +8,7 @@ DinoStateDead::DinoStateDead() {
 }
 
 void DinoStateDead::enter(Dino& dino)
-{	
+{		
 }
 
 void DinoStateDead::exit(Dino& dino)
@@ -16,7 +16,7 @@ void DinoStateDead::exit(Dino& dino)
 }
 
 void DinoStateDead::handleInput(Dino& dino)
-{	
+{		
 }
 
 void DinoStateDead::update(Dino& dino)
@@ -27,6 +27,8 @@ void DinoStateDead::update(Dino& dino)
 void DinoStateDead::render(Dino& dino)
 {
 	_sprite.render(dino.position, dino.size);
+
+	DrawText("You dead...", 10, 10, 50, RAYWHITE);
 }
 
 // construct on first use idiom (https://isocpp.org/wiki/faq/ctors#static-init-order)

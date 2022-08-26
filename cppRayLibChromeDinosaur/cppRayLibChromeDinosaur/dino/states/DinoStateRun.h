@@ -8,6 +8,8 @@
 #include "../Dino.h"
 #include "DinoState.h"
 
+class DinoGame;
+
 class DinoStateRun : public DinoState
 {
 private:

@@ -19,8 +19,7 @@ void DinoGame::handleInput()
 {	
 	_dino->handleInput();
 
-	if (IsKeyPressed(KEY_KP_ADD)) Globals::instance().worldSpeed += 1.f;
-	if (IsKeyPressed(KEY_KP_SUBTRACT)) Globals::instance().worldSpeed -= 1.f;
+	if (IsKeyPressed(KEY_KP_ADD)) Globals::instance().worldSpeed += 1.f;	
 }
 
 void DinoGame::update(){			
@@ -32,7 +31,5 @@ void DinoGame::render()
 {
 	_background.renderBackground();
 	_dino->render();
-	_background.renderForeground();
-	
-	DrawText("Dinosaurs!", 10, 10, 50, RAYWHITE);
+	_background.renderForeground();	
 }

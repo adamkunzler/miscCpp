@@ -17,7 +17,7 @@ int main(void)
 	SetTargetFPS(60);
 	
 	DinoGame game;
-
+	
 	//
 	// MAIN RENDER LOOP
 	//

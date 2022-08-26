@@ -27,7 +27,7 @@ public:
 	
 public:	
 	Dino();
-		
+			
 	void handleInput();
 	void update();
 	void render();
@@ -36,6 +36,7 @@ public:
 	void restorePreviousState();
 	
 	bool isJumping();
+	bool isDyingOrDead();
 };
 
 

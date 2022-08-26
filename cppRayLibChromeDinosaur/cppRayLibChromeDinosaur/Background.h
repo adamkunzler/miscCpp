@@ -3,9 +3,11 @@
 
 #include <vector>
 
+#include "raylib.h"
+
 #include "Globals.h"
 
-#include "raylib.h"
+class DinoGame;
 
 class BackgroundLayer
 {

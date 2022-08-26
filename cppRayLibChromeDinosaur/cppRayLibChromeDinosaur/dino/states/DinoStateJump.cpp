@@ -26,7 +26,7 @@ void DinoStateJump::update(Dino& dino)
 	_sprite.update();
 	
 	dino.position.y -= _velocity.y;
-	_velocity.y -= 0.75f;
+	_velocity.y -= 0.85f;
 
 	if (dino.position.y >= dino.startY) 
 	{
@@ -38,6 +38,8 @@ void DinoStateJump::update(Dino& dino)
 void DinoStateJump::render(Dino& dino)
 {
 	_sprite.render(dino.position, dino.size);
+
+	DrawText("JUMP!", 10, 10, 50, RAYWHITE);
 }
 
 // construct on first use idiom (https://isocpp.org/wiki/faq/ctors#static-init-order)

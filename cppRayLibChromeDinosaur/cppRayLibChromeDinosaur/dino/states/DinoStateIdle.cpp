@@ -14,7 +14,11 @@ void DinoStateIdle::exit(Dino& dino)
 
 void DinoStateIdle::handleInput(Dino& dino)
 {	
-	if (IsKeyPressed(KEY_SPACE))  dino.setState(&DinoStateJump::getInstance());
+	if (IsKeyPressed(KEY_SPACE))
+	{
+		dino.setState(&DinoStateWalk::getInstance());
+		Globals::instance().worldSpeed = 1;
+	}
 }
 
 void DinoStateIdle::update(Dino& dino)
@@ -25,6 +29,8 @@ void DinoStateIdle::update(Dino& dino)
 void DinoStateIdle::render(Dino& dino)
 {
 	_sprite.render(dino.position, dino.size);
+
+	DrawText("Press 'spacebar' to start.", 10, 10, 50, RAYWHITE);
 }
 
 // construct on first use idiom (https://isocpp.org/wiki/faq/ctors#static-init-order)

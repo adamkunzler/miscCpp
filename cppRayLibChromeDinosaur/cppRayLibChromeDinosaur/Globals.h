@@ -8,7 +8,7 @@ class Globals
 private:	
 	static Globals _instance;
 	
-	std::unique_ptr<SpriteFactory> _spriteFactory;
+	std::unique_ptr<SpriteFactory> _spriteFactory;	
 
 public:
 	float worldSpeed{ 0.f };
@@ -18,7 +18,7 @@ public:
 	
 	Globals();
 
-	SpriteFactory& spriteFactory();
+	SpriteFactory& spriteFactory();	
 };
 
 
