@@ -1,11 +1,12 @@
 #include "SpriteFactory.h"
 
-void SpriteFactory::registerSprite(SpriteType type, const char* filename, Vector2 dimensions)
+void SpriteFactory::registerSprite(SpriteType type, std::string filename, Vector2 dimensions, int numFrames)
 {
 	_spriteConfigs[type] = SpriteConfig{
 		type,
-		std::make_shared<Texture2D>(LoadTexture(filename)),
-		dimensions
+		filename,
+		dimensions,
+		numFrames
 	};
 }
 

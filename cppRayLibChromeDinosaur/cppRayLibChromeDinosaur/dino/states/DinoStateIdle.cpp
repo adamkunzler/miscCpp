@@ -28,7 +28,7 @@ void DinoStateIdle::update(Dino& dino)
 
 void DinoStateIdle::render(Dino& dino)
 {
-	_sprite.render(dino.position, dino.size);
+	_sprite.render(dino.position);
 
 	DrawText("Press 'spacebar' to start.", 10, 10, 50, RAYWHITE);
 }

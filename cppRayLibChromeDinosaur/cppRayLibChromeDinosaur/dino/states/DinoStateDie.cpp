@@ -31,7 +31,7 @@ void DinoStateDie::update(Dino& dino)
 
 void DinoStateDie::render(Dino& dino)
 {
-	_sprite.render(dino.position, dino.size);
+	_sprite.render(dino.position);
 
 	DrawText("Urgh! Argh!", 10, 10, 50, RAYWHITE);
 }

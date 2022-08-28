@@ -26,7 +26,7 @@ void DinoStateDead::update(Dino& dino)
 
 void DinoStateDead::render(Dino& dino)
 {
-	_sprite.render(dino.position, dino.size);
+	_sprite.render(dino.position);
 
 	DrawText("You dead...", 10, 10, 50, RAYWHITE);
 }

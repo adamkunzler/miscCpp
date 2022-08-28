@@ -23,8 +23,7 @@ private:
 public:
 	float startY;
 	Vector2 position{ 0, 0 };	
-	float size{ 256.f };
-	
+		
 public:	
 	Dino();
 			

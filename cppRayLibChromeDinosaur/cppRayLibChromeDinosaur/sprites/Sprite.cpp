@@ -15,11 +15,6 @@ bool Sprite::isType(SpriteType type)
 	return type == _config.type;
 }
 
-const Vector2& Sprite::dimension() const 
-{ 
-	return _config.frameDimensions; 
-}
-
 void Sprite::update()
 {
 	if (!isAnimated) return;
@@ -37,18 +32,31 @@ void Sprite::update()
 	}
 }
 
-void Sprite::render(const Vector2& position, const float maxWidth, const bool flipHoriz) const
+void Sprite::render(const Vector2& position) const
 {
-	float ratio = _config.frameDimensions.x / maxWidth;
-	float height = _config.frameDimensions.y / ratio;
-
+	
 	Rectangle src = _config.frames.at(_currentFrame);
-	Rectangle dest{ position.x, position.y, maxWidth, height };
-	Vector2 origin{ maxWidth / 2.f, height / 2.f };
+	Rectangle dest{ position.x, position.y, src.width, src.height };
+	Vector2 origin{ src.width / 2.f, src.height / 2.f };
+	
+	DrawTexturePro(*_config.texture, src, dest, origin, 0.f, WHITE);
 
-	if (flipHoriz) src.width = -src.width;
+	if (true)
+	{
+		// sprite bounds
+		DrawRectangleLines(dest.x - origin.x, dest.y - origin.y, dest.width, dest.height, SKYBLUE);
 
-	DrawTexturePro(*_config.texture, src, dest, origin, 0.f, WHITE);	
+		// sprite position (center)
+		DrawCircle(position.x, position.y, 5.f, PURPLE);
+
+		// sprite bounding box
+		DrawRectangleLines(
+			_config.boundingBoxes.at(_currentFrame).x + dest.x - origin.x,
+			_config.boundingBoxes.at(_currentFrame).y + dest.y - origin.y,
+			_config.boundingBoxes.at(_currentFrame).width,
+			_config.boundingBoxes.at(_currentFrame).height,
+			GREEN);
+	}
 }
 
 int Sprite::getFrameCount() const

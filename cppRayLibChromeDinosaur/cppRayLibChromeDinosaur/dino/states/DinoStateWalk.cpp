@@ -34,7 +34,7 @@ void DinoStateWalk::update(Dino& dino)
 
 void DinoStateWalk::render(Dino& dino)
 {
-	_sprite.render(dino.position, dino.size);
+	_sprite.render(dino.position);
 
 	DrawText("Walking...", 10, 10, 50, RAYWHITE);
 }

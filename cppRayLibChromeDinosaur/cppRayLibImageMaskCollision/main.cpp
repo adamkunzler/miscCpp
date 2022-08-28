@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "raymath.h"
 
+
 struct Dino
 {
 	Texture2D texture;

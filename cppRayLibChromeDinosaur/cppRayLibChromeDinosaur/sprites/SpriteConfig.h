@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 #include "raylib.h"
 
@@ -19,18 +20,23 @@ enum class SpriteType
 class SpriteConfig
 {
 public:
+	std::string filename;
+	
 	std::shared_ptr<Texture2D> texture = nullptr;
-	std::vector<Rectangle> frames;
-	Vector2 frameDimensions{ 0, 0 };
-	SpriteType type { SpriteType::UNKNOWN };
+	SpriteType type{ SpriteType::UNKNOWN };
+
+	std::vector<Rectangle> frames;			// rectangle of frame in sprite texture
+	Vector2 size{ 0, 0 };					// width and height of a frame
+	std::vector<Rectangle> boundingBoxes;	// bounding box for each frame
+	
 
 	SpriteConfig() = default;
 
-	SpriteConfig(SpriteType type, const std::shared_ptr<Texture2D>& texture, Vector2 frameDimensions);
+	SpriteConfig(SpriteType type, std::string filename, Vector2 size, int numFrames);
 
 private:
 
-	void generateFrames();
+	void generate(const int numFrames);
 };
 
 #endif

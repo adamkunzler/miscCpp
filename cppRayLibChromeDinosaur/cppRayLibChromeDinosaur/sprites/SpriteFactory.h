@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <stdexcept>
+#include <string>
 
 #include "raylib.h"
 
@@ -20,7 +21,7 @@ private:
 	std::map<SpriteType, SpriteConfig> _spriteConfigs;
 	
 public:
-	void registerSprite(SpriteType type, const char* filename, Vector2 dimensions);
+	void registerSprite(SpriteType type, std::string filename, Vector2 dimensions, int numFrames);
 
 	Sprite getSprite(SpriteType type);
 };

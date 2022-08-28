@@ -34,7 +34,7 @@ void DinoStateRun::update(Dino& dino)
 
 void DinoStateRun::render(Dino& dino)
 {
-	_sprite.render(dino.position, dino.size);
+	_sprite.render(dino.position);
 
 	DrawText("Running...", 10, 10, 50, RAYWHITE);
 }

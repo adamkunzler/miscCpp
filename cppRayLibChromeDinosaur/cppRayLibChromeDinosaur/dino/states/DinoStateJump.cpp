@@ -37,7 +37,7 @@ void DinoStateJump::update(Dino& dino)
 
 void DinoStateJump::render(Dino& dino)
 {
-	_sprite.render(dino.position, dino.size);
+	_sprite.render(dino.position);
 
 	DrawText("JUMP!", 10, 10, 50, RAYWHITE);
 }

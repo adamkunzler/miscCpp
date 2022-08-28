@@ -29,11 +29,9 @@ public:
 	
 	bool isType(SpriteType type);
 
-	const Vector2& dimension() const;
-
 	void update();
 
-	void render(const Vector2& position, const float maxWidth, const bool flipHoriz = false) const;
+	void render(const Vector2& position) const;
 
 	int getFrameCount() const;
 
