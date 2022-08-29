@@ -1,7 +1,7 @@
 #include "DinoStateDead.h"
 
 DinoStateDead::DinoStateDead() {	
-	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_DEAD);	
+	_sprite = DinoGame::instance().spriteFactory().getSprite(SpriteType::DINO_DEAD);	
 
 	_sprite.setCurrentFrame(_sprite.getFrameCount() - 1);
 	_sprite.isAnimated = false;

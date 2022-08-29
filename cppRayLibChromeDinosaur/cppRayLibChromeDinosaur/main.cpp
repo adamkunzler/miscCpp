@@ -4,6 +4,8 @@
 
 #include "DinoGame.h"
 
+//DinoGame::instance().
+
 int main(void)
 {	
 	//
@@ -15,9 +17,9 @@ int main(void)
 	InitWindow(screenWidth, screenHeight, ".: Dinosaur Game :.");
 
 	SetTargetFPS(60);
-	
-	DinoGame game;
-	
+
+	DinoGame::instance().init();
+
 	//
 	// MAIN RENDER LOOP
 	//
@@ -26,12 +28,12 @@ int main(void)
 		//
 		// Process Inputs
 		//		
-		game.handleInput();
+		DinoGame::instance().handleInput();
 
 		//
 		// Update
 		//
-		game.update();
+		DinoGame::instance().update();
 
 		//
 		// Draw
@@ -39,7 +41,7 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 
-		game.render();
+		DinoGame::instance().render();
 
 		EndDrawing();
 	}

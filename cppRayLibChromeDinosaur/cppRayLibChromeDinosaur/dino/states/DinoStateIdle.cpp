@@ -1,7 +1,7 @@
 #include "DinoStateIdle.h"
 
 DinoStateIdle::DinoStateIdle() {	
-	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_IDLE);
+	_sprite = DinoGame::instance().spriteFactory().getSprite(SpriteType::DINO_IDLE);
 }
 
 void DinoStateIdle::enter(Dino& dino)
@@ -17,7 +17,7 @@ void DinoStateIdle::handleInput(Dino& dino)
 	if (IsKeyPressed(KEY_SPACE))
 	{
 		dino.setState(&DinoStateWalk::getInstance());
-		Globals::instance().worldSpeed = 1;
+		DinoGame::instance().worldSpeed = 1;
 	}
 }
 

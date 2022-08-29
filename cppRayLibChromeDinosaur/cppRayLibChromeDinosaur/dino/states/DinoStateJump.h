@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-#include "../../Globals.h"
 #include "../../sprites/Sprite.h"
 #include "../Dino.h"
 #include "DinoState.h"

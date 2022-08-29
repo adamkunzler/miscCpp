@@ -80,7 +80,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -109,7 +109,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -146,7 +146,6 @@
     <ClCompile Include="dino\states\DinoStateJump.cpp" />
     <ClCompile Include="dino\states\DinoStateRun.cpp" />
     <ClCompile Include="dino\states\DinoStateWalk.cpp" />
-    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DinoGame.cpp" />
     <ClCompile Include="sprites\Sprite.cpp" />
@@ -164,7 +163,6 @@
     <ClInclude Include="dino\states\DinoStateJump.h" />
     <ClInclude Include="dino\states\DinoStateRun.h" />
     <ClInclude Include="dino\states\DinoStateWalk.h" />
-    <ClInclude Include="Globals.h" />
     <ClInclude Include="sprites\Sprite.h" />
     <ClInclude Include="sprites\SpriteConfig.h" />
     <ClInclude Include="sprites\SpriteFactory.h" />

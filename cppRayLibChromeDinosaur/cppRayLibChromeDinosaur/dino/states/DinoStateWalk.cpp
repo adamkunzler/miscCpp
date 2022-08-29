@@ -1,7 +1,7 @@
 #include "DinoStateWalk.h"
 
 DinoStateWalk::DinoStateWalk() {	
-	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_WALK);
+	_sprite = DinoGame::instance().spriteFactory().getSprite(SpriteType::DINO_WALK);
 }
 
 void DinoStateWalk::enter(Dino& dino)
@@ -15,7 +15,7 @@ void DinoStateWalk::exit(Dino& dino)
 void DinoStateWalk::handleInput(Dino& dino)
 {	
 	if (IsKeyPressed(KEY_KP_ADD))
-		Globals::instance().worldSpeed++;
+		DinoGame::instance().worldSpeed++;
 
 	if (IsKeyPressed(KEY_SPACE))  
 		dino.setState(&DinoStateJump::getInstance());
@@ -28,7 +28,7 @@ void DinoStateWalk::update(Dino& dino)
 {
 	_sprite.update();
 
-	if (Globals::instance().worldSpeed > 5 && !dino.isJumping() && !dino.isDyingOrDead())
+	if (DinoGame::instance().worldSpeed > 5 && !dino.isJumping() && !dino.isDyingOrDead())
 		dino.setState(&DinoStateRun::getInstance());
 }
 

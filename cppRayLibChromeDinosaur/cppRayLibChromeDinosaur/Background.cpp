@@ -7,8 +7,8 @@ BackgroundLayer::BackgroundLayer(Texture2D texture, int depth)
 }
 
 void BackgroundLayer::update()
-{
-	_backgroundOffset += Globals::instance().worldSpeed;
+{	
+	_backgroundOffset += DinoGame::instance().worldSpeed;
 	auto layerOffset = (int)(((float)_depth / 11.f) * _backgroundOffset);
 	if (layerOffset > getWidth())
 		_backgroundOffset = layerOffset - getWidth();
@@ -26,7 +26,10 @@ int BackgroundLayer::getWidth() const { return (int)_texture.width; }
 // --------------------------------------------------------------------------------------------
 
 
-Background::Background() {	
+Background::Background() {}
+
+void Background::init()
+{
 	_backgroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0011_0.png"),       1 });
 	_backgroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0009_2.png"),       2 });
 	_backgroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0008_3.png"),       3 });
@@ -36,7 +39,7 @@ Background::Background() {
 	_backgroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0004_Lights.png"),  7 });
 	_backgroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0003_6.png"),       8 });
 	_backgroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0002_7.png"),       9 });
-	
+
 	_foregroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0001_8.png"),      10 });
 	_foregroundLayers.push_back(BackgroundLayer{ LoadTexture("resources/Background layers/Layer_0000_9.png"),      11 });
 }

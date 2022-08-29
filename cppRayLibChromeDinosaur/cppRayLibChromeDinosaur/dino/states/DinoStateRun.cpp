@@ -1,7 +1,7 @@
 #include "DinoStateRun.h"
 
 DinoStateRun::DinoStateRun() {	
-	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_RUN);
+	_sprite = DinoGame::instance().spriteFactory().getSprite(SpriteType::DINO_RUN);
 }
 
 void DinoStateRun::enter(Dino& dino)
@@ -15,7 +15,7 @@ void DinoStateRun::exit(Dino& dino)
 void DinoStateRun::handleInput(Dino& dino)
 {	
 	if (IsKeyPressed(KEY_KP_ADD))
-		Globals::instance().worldSpeed++;
+		DinoGame::instance().worldSpeed++;
 
 	if (IsKeyPressed(KEY_SPACE))  
 		dino.setState(&DinoStateJump::getInstance());
@@ -28,8 +28,8 @@ void DinoStateRun::update(Dino& dino)
 {
 	_sprite.update();
 
-	if (Globals::instance().worldSpeed > 15) // 12 is the initial fps (80% of 15 is 12)
-		_sprite.frameSpeed = (int)(Globals::instance().worldSpeed * 0.8f);
+	if (DinoGame::instance().worldSpeed > 15) // 12 is the initial fps (80% of 15 is 12)
+		_sprite.frameSpeed = (int)(DinoGame::instance().worldSpeed * 0.8f);
 }
 
 void DinoStateRun::render(Dino& dino)

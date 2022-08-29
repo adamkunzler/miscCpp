@@ -5,9 +5,9 @@
 
 #include "raylib.h"
 
-#include "Globals.h"
-
 class DinoGame;
+
+// --------------------------------------------------------------------------------------------
 
 class BackgroundLayer
 {
@@ -18,7 +18,7 @@ private:
 
 public:
 	BackgroundLayer(Texture2D texture, int depth);
-	
+		
 	void update();
 
 	void render() const;
@@ -40,6 +40,8 @@ private:
 public:
 	Background();
 	
+	void init();
+
 	void update();
 
 	void renderBackground() const;

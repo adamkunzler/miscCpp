@@ -1,7 +1,7 @@
 #include "DinoStateDie.h"
 
 DinoStateDie::DinoStateDie() {	
-	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_DEAD);
+	_sprite = DinoGame::instance().spriteFactory().getSprite(SpriteType::DINO_DEAD);
 	_sprite.frameSpeed = 7;
 }
 
@@ -12,7 +12,7 @@ void DinoStateDie::enter(Dino& dino)
 
 void DinoStateDie::exit(Dino& dino)
 {	
-	Globals::instance().worldSpeed = 0;
+	DinoGame::instance().worldSpeed = 0;
 }
 
 void DinoStateDie::handleInput(Dino& dino)
@@ -23,7 +23,7 @@ void DinoStateDie::update(Dino& dino)
 {
 	_sprite.update();
 
-	Globals::instance().worldSpeed -= (Globals::instance().worldSpeed / _sprite.getFrameCount() / 2.f);
+	DinoGame::instance().worldSpeed -= (DinoGame::instance().worldSpeed / _sprite.getFrameCount() / 2.f);
 
 	if (_sprite.getFrameCount() - 1 == _sprite.getCurrentFrame())
 		dino.setState(&DinoStateDead::getInstance());

@@ -1,7 +1,7 @@
 #include "DinoStateJump.h"
 
 DinoStateJump::DinoStateJump() {	
-	_sprite = Globals::instance().spriteFactory().getSprite(SpriteType::DINO_JUMP);
+	_sprite = DinoGame::instance().spriteFactory().getSprite(SpriteType::DINO_JUMP);
 }
 
 void DinoStateJump::enter(Dino& dino)

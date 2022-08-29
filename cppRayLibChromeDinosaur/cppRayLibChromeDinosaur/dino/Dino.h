@@ -3,8 +3,6 @@
 
 #include "raylib.h"
 
-#include "../Globals.h"
-
 #include "states/DinoStateIdle.h"
 #include "states/DinoStateWalk.h"
 #include "states/DinoStateRun.h"
