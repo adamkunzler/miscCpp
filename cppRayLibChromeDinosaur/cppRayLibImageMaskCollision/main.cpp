@@ -26,12 +26,43 @@ struct Dino
 		position.y = GetScreenHeight() / 2.f;// GetRandomValue(texture.height, GetScreenHeight() - texture.height);		
 	}
 
-	void update()
-	{				
-		// collision with screen
-
-
+	void update(const Dino& other)
+	{						
 		// collision with other objects
+
+		Rectangle a{
+			boundingBox.x + position.x,
+			boundingBox.y + position.y,
+			boundingBox.width,
+			boundingBox.height
+		};
+
+		Rectangle b{
+			other.boundingBox.x + other.position.x,
+			other.boundingBox.y + other.position.y,
+			other.boundingBox.width,
+			other.boundingBox.height
+		};
+
+		//if (CheckCollisionRecs(a, b))
+		if (CheckCollision(a, b))
+		{
+			std::cout << "*";
+		}
+	}
+
+	bool CheckCollision(const Rectangle& a, const Rectangle& b) const
+	{
+		if(
+			a.x + a.width > b.x
+			&& a.x < b.x + b.width
+			&& a.y + a.height > b.y
+			&& a.y < b.y + b.height)
+		{
+			return true;
+		}
+
+		return false;
 	}
 
 	void render()
@@ -99,12 +130,9 @@ int main(void)
 
 		//
 		// Update
-		//
-
-		d1.update();
-		
+		//				
 		d2.position = GetMousePosition();
-		d2.update();
+		d2.update(d1);
 
 
 
