@@ -24,10 +24,26 @@ void updateParticleBatch(Span span, int screenWidth, int screenHeight, GridParti
 		partition.query(p.position, p.neighbors); // ??? seems like a bad idea to do this here
 
 		// bounce off walls
-		if (p.position.x < p.radius) p.velocity.x = -p.velocity.x;
-		if (p.position.y < p.radius) p.velocity.y = -p.velocity.y;
-		if (p.position.x > screenWidth - p.radius) p.velocity.x = -p.velocity.x;
-		if (p.position.y > screenHeight - p.radius) p.velocity.y = -p.velocity.y;
+		if (p.position.x < p.radius)
+		{
+			p.position.x = p.radius + 1.f;
+			p.velocity.x = -p.velocity.x;
+		}
+		if (p.position.y < p.radius)
+		{
+			p.position.y = p.radius + 1.f;
+			p.velocity.y = -p.velocity.y;
+		}
+		if (p.position.x > screenWidth - p.radius)
+		{
+			p.position.x = screenWidth - p.radius - 1.f;
+			p.velocity.x = -p.velocity.x;
+		}
+		if (p.position.y > screenHeight - p.radius)
+		{
+			p.position.y = screenHeight - p.radius - 1.f;
+			p.velocity.y = -p.velocity.y;
+		}		
 	}	
 }
 
@@ -83,14 +99,17 @@ public:
 			p.render(_particleTexture);			
 
 		// text displays
-		auto strMouseScreen = "Mouse: " + std::to_string(GetMouseX()) + ", " + std::to_string(GetMouseY());
-		DrawText(strMouseScreen.c_str(), 10, 10, 16, WHITE);
+		if (0)
+		{
+			auto strMouseScreen = "Mouse: " + std::to_string(GetMouseX()) + ", " + std::to_string(GetMouseY());
+			DrawText(strMouseScreen.c_str(), 10, 10, 16, WHITE);
 
-		auto mouseCell = _partition.getCell((float)GetMouseX(), (float)GetMouseY());
-		auto strMouseCell = "Cell: " + std::to_string(mouseCell.x) + ", " + std::to_string(mouseCell.y);
-		DrawText(strMouseCell.c_str(), 10, 30, 16, WHITE);
+			auto mouseCell = _partition.getCell((float)GetMouseX(), (float)GetMouseY());
+			auto strMouseCell = "Cell: " + std::to_string(mouseCell.x) + ", " + std::to_string(mouseCell.y);
+			DrawText(strMouseCell.c_str(), 10, 30, 16, WHITE);
 
-		DrawFPS(10, _screenHeight - 20);
+			DrawFPS(10, _screenHeight - 20);
+		}
 
 		EndDrawing();
 	}	
@@ -109,16 +128,7 @@ public:
 
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			/*std::vector<Particle*> results;
-			results.reserve(_particles.size());*/
-
-			auto mousePosition = glm::vec2{ GetMouseX(), GetMouseY() };
-			//_partition.query(mousePosition, results);		
-						
-			/*for (auto& r : results) {				
-				std::cout << r->id() << std::endl;
-			}
-			std::cout << std::endl;*/
+			
 		}		
 	}
 
@@ -140,11 +150,16 @@ private:
 				(float)GetRandomValue(-5, 5),
 				(float)GetRandomValue(-5, 5) };
 
+			// prevent velocity of 0 (glm::normalize will give nan)
+			if (p.velocity.x == 0.f) p.velocity.x = 3.5f;
+			if (p.velocity.y == 0.f) p.velocity.y = 1.5f;
+
 			p.velocity = glm::normalize(p.velocity) * MAX_VELOCITY;
 
 			p.radius = DEFAULT_RADIUS;
+			p.mass = (float)GetRandomValue(10, 50) / 10.f;
 
-			_particles.emplace_back(p);
+			_particles.emplace_back(p);			
 		}
 	}
 	
@@ -186,6 +201,21 @@ private:
 			_threadPool.enqueue(std::bind(updateParticleBatch<std::span<Particle>>, range, _screenWidth, _screenHeight, _partition));
 
 		_threadPool.waitFinished();
+
+		for (auto& p : _particles)
+		{
+			for (auto& n : p.neighbors)
+			{
+				if (n == nullptr) continue;
+
+				Particle* temp = n;
+				while (temp != nullptr)
+				{					
+					p.checkColllision(*temp);
+					temp = temp->next;
+				}
+			}			
+		}
 	}
 
 private:	

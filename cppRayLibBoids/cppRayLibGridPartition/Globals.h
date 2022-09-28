@@ -2,15 +2,15 @@
 #define GLOBALS_H
 
 
-const int MAX_PARTICLES{ 640 };
+const int MAX_PARTICLES{ 200 };
 
-const int MAX_THREADS{ 16 };
+const int MAX_THREADS{ 8 };
 
-const float CELL_SIZE{ 32.f };
+const float CELL_SIZE{ 256.f };
 
-const float DEFAULT_RADIUS{ 7.5f };
+const float DEFAULT_RADIUS{ 32.f };
 
-const float MAX_VELOCITY{ 3.f };
+const float MAX_VELOCITY{ 5.f };
 
 
 #endif

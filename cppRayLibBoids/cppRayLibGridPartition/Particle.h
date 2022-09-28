@@ -21,6 +21,8 @@ public:
 	glm::vec2 velocity{ 0 };
 	glm::vec2 heading{ 0 };
 	float radius{ 0.f };	
+	float mass;
+	float angle;
 
 	std::vector<Particle*> neighbors;
 
@@ -30,6 +32,8 @@ public:
 	Particle();
 
 	void update();
+
+	void checkColllision(Particle& p);
 
 	void render(Texture& texture);
 
