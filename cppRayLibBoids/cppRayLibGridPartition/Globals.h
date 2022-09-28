@@ -1,10 +1,10 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-const int WORLD_WIDTH{ 2048 * 10 };
-const int WORLD_HEIGHT{ 2048 * 10 };
+const int WORLD_WIDTH{ 2048 * 1 };
+const int WORLD_HEIGHT{ 2048 * 1 };
 
-const int MAX_PARTICLES{ 25000 };
+const size_t MAX_PARTICLES{ 500 };
 
 const int MAX_THREADS{ 5 };
 

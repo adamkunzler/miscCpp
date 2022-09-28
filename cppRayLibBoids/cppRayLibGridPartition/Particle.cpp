@@ -1,27 +1,14 @@
 #include "Particle.h"
 
-uint32_t Particle::_nextId{ 1 };
-
-uint32_t Particle::getNextId()
-{
-	return _nextId++;
-}
-
 Particle::Particle()
-{
-	_id = getNextId();
-	//std::cout << "Particle ctor => " << _id << std::endl;
-
+{		
 	neighbors.reserve(MAX_PARTICLES);
 
 	next = nullptr;
 	prev = nullptr;
 }
 
-uint32_t Particle::id()
-{
-	return _id;
-}
+
 
 void Particle::update()
 {
@@ -29,8 +16,7 @@ void Particle::update()
 	
 	oldPosition = position;
 	position += velocity;
-	heading = glm::normalize(velocity);
-	angle = glm::atan(heading.y, heading.x);
+	heading = glm::normalize(velocity);	
 }
 
 void Particle::checkColllision(Particle& p)

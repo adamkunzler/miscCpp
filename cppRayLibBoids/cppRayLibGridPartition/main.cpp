@@ -20,7 +20,7 @@ int main(void)
 
 	SetTargetFPS(60);
 
-	Sim sim{ (size_t)MAX_PARTICLES };
+	Sim sim;
 
 	//
 	// MAIN RENDER LOOP

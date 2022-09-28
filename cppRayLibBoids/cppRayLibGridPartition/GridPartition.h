@@ -5,7 +5,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Particle.h"
+#include "SimEntity.h"
 #include "QueryResult.h"
 
 struct Cell
