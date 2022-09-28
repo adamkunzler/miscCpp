@@ -22,11 +22,11 @@ public:
 	{
 	}
 
-	void init(int screenWidth, int screenHeight, float cellSize)
+	void init(float cellSize)
 	{
 		_cellSize = cellSize;
-		_width = (size_t)(screenWidth / _cellSize);
-		_height = (size_t)(screenHeight / _cellSize);
+		_width = (size_t)(WORLD_WIDTH / _cellSize);
+		_height = (size_t)(WORLD_HEIGHT / _cellSize);
 
 		// create the cells
 		_cells.reserve(_width * _height);

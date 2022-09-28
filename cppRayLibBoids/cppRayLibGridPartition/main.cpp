@@ -14,13 +14,13 @@ int main(void)
 	// Initialization	
 	//
 	const int screenWidth{ 2048 };
-	const int screenHeight{ 1536 };
+	const int screenHeight{ 1920 };
 		
 	InitWindow(screenWidth, screenHeight, ".: Grid Partition :.");
 
 	SetTargetFPS(60);
 
-	Sim sim{ screenWidth, screenHeight, (size_t)MAX_PARTICLES };
+	Sim sim{ (size_t)MAX_PARTICLES };
 
 	//
 	// MAIN RENDER LOOP

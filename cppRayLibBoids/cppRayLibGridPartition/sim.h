@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 #include "raylib.h"
+#include "raymath.h"
 
 #include "Globals.h"
 #include "Particle.h"
@@ -15,7 +16,7 @@
 #include "ThreadPool.h"
 
 template <typename Span>
-void updateParticleBatch(Span span, int screenWidth, int screenHeight, GridPartition& partition)
+void updateParticleBatch(Span span, GridPartition& partition)
 {		
 	for (auto& p : span)
 	{		
@@ -34,14 +35,14 @@ void updateParticleBatch(Span span, int screenWidth, int screenHeight, GridParti
 			p.position.y = p.radius + 1.f;
 			p.velocity.y = -p.velocity.y;
 		}
-		if (p.position.x > screenWidth - p.radius)
+		if (p.position.x > WORLD_WIDTH - p.radius)
 		{
-			p.position.x = screenWidth - p.radius - 1.f;
+			p.position.x = WORLD_WIDTH - p.radius - 1.f;
 			p.velocity.x = -p.velocity.x;
 		}
-		if (p.position.y > screenHeight - p.radius)
+		if (p.position.y > WORLD_HEIGHT - p.radius)
 		{
-			p.position.y = screenHeight - p.radius - 1.f;
+			p.position.y = WORLD_HEIGHT - p.radius - 1.f;
 			p.velocity.y = -p.velocity.y;
 		}		
 	}	
@@ -50,15 +51,14 @@ void updateParticleBatch(Span span, int screenWidth, int screenHeight, GridParti
 class Sim
 {
 public:
-	Sim(int screenWidth, int screenHeight, size_t numParticles)
-		: _screenWidth{screenWidth}, _screenHeight{ screenHeight }
+	Sim(size_t numParticles)		
 	{
 		SetRandomSeed(1711);
 		
 		initParticles(numParticles);
 		
 		// create and initialize the partition
-		_partition.init(screenWidth, screenHeight, CELL_SIZE); // should be half of flocking radius | should be evenly divisble by screen dims
+		_partition.init(CELL_SIZE); // should be half of flocking radius | should be evenly divisble by screen dims
 		for (auto& p : _particles) _partition.add(&p);		
 
 		initParticleUpdateChunks();
@@ -68,6 +68,8 @@ public:
 		ImageResize(&temp, (int)(DEFAULT_RADIUS * 2.f), (int)(DEFAULT_RADIUS * 2.f));
 		_particleTexture = LoadTextureFromImage(temp);
 		UnloadImage(temp);
+
+		_camera.zoom = 1.f;
 	}
 
 	~Sim()
@@ -92,24 +94,25 @@ public:
 		BeginDrawing();
 		ClearBackground(BLACK);
 
+		BeginMode2D(_camera);
+
 		if(_isRenderPartition)
 			_partition.render();
 
 		for (auto& p : _particles)
 			p.render(_particleTexture);			
 
+		EndMode2D();
+
 		// text displays
-		if (0)
+		if (1)
 		{
-			auto strMouseScreen = "Mouse: " + std::to_string(GetMouseX()) + ", " + std::to_string(GetMouseY());
-			DrawText(strMouseScreen.c_str(), 10, 10, 16, WHITE);
-
-			auto mouseCell = _partition.getCell((float)GetMouseX(), (float)GetMouseY());
-			auto strMouseCell = "Cell: " + std::to_string(mouseCell.x) + ", " + std::to_string(mouseCell.y);
-			DrawText(strMouseCell.c_str(), 10, 30, 16, WHITE);
-
-			DrawFPS(10, _screenHeight - 20);
-		}
+			auto mouseWorld = GetScreenToWorld2D(GetMousePosition(), _camera);
+			auto strMouseScreen = "Mouse: " + std::to_string(mouseWorld.x) + ", " + std::to_string(mouseWorld.y);
+			DrawText(strMouseScreen.c_str(), 10, 30, 16, WHITE);
+		
+			DrawFPS(10, 10);
+		}		
 
 		EndDrawing();
 	}	
@@ -126,10 +129,25 @@ public:
 			_isRenderPartition = !_isRenderPartition;
 		}
 
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 		{
-			
+			auto delta = GetMouseDelta();
+			delta = Vector2Scale(delta, (- 1.0f / _camera.zoom));
+
+			_camera.target = Vector2Add(_camera.target, delta);
 		}		
+
+		float wheel = GetMouseWheelMove();
+		if (wheel != 0.f)
+		{
+			auto mouseWorldPos = GetScreenToWorld2D(GetMousePosition(), _camera);
+			_camera.offset = GetMousePosition();
+			_camera.target = mouseWorldPos;
+
+			const float zoomIncrement{ 0.125f };
+			_camera.zoom += (wheel * zoomIncrement);
+			if (_camera.zoom < zoomIncrement) _camera.zoom = zoomIncrement;
+		}
 	}
 
 private:
@@ -142,8 +160,8 @@ private:
 		{		
 			Particle p;
 			p.position = glm::vec2{
-				(float)GetRandomValue((int)DEFAULT_RADIUS, (int)(_screenWidth - DEFAULT_RADIUS)),
-				(float)GetRandomValue((int)DEFAULT_RADIUS, (int)(_screenHeight - DEFAULT_RADIUS))};
+				(float)GetRandomValue((int)DEFAULT_RADIUS, (int)(WORLD_WIDTH - DEFAULT_RADIUS)),
+				(float)GetRandomValue((int)DEFAULT_RADIUS, (int)(WORLD_HEIGHT - DEFAULT_RADIUS))};
 			p.oldPosition = p.position;
 
 			p.velocity = glm::vec2{
@@ -157,7 +175,7 @@ private:
 			p.velocity = glm::normalize(p.velocity) * MAX_VELOCITY;
 
 			p.radius = DEFAULT_RADIUS;
-			p.mass = (float)GetRandomValue(10, 50) / 10.f;
+			p.mass = (float)GetRandomValue(10, 100) / 10.f;
 
 			_particles.emplace_back(p);			
 		}
@@ -180,28 +198,15 @@ private:
 			endRange += chunkSize;
 		}
 	}
-
-	void updateSingleThread()
-	{		
-		for (auto& p : _particles)
-		{
-			p.update();
-
-			// fix bounds
-			if (p.position.x < -p.radius) p.position.x = _screenWidth + p.radius;
-			if (p.position.y < -p.radius) p.position.y = _screenHeight + p.radius;
-			if (p.position.x > _screenWidth + p.radius) p.position.x = -p.radius;
-			if (p.position.y > _screenHeight + p.radius) p.position.y = -p.radius;
-		}	
-	}
-
+	
 	void updateMultiThread()
 	{
 		for (auto& range : _ranges)
-			_threadPool.enqueue(std::bind(updateParticleBatch<std::span<Particle>>, range, _screenWidth, _screenHeight, _partition));
+			_threadPool.enqueue(std::bind(updateParticleBatch<std::span<Particle>>, range, _partition));
 
 		_threadPool.waitFinished();
 
+		// collision detection
 		for (auto& p : _particles)
 		{
 			for (auto& n : p.neighbors)
@@ -218,9 +223,8 @@ private:
 		}
 	}
 
-private:	
-	int _screenWidth{ 0 };
-	int _screenHeight{ 0 };
+private:		
+	Camera2D _camera{ 0 };
 
 	bool _isStarted{ false };
 	bool _isRenderPartition{ false };
